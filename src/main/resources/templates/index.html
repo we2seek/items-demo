@@ -26,7 +26,7 @@
     </thead>
     <tbody>
     <tr th:if="${items.empty}">
-        <td colspan="4"> No Books Available</td>
+        <td colspan="4">No items available...</td>
     </tr>
     <tr th:each="item : ${items}">
         <td><span th:text="${item.id}">ID</span></td>
