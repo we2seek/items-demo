@@ -20,3 +20,8 @@ docker build -t items-demo-docker .
 ```
 docker run --detach -p 8080:8080 items-demo-docker
 ```
+
+### Working w/ io.fabric8:docker-maven-plugin
+```
+mvn clean package docker:build
+```
