@@ -10,7 +10,7 @@
     </parent>
     <groupId>com.we2seek</groupId>
     <artifactId>items-demo</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>0.0.2-SNAPSHOT</version>
     <name>items-demo</name>
     <description>Demo project for Spring Boot</description>
     <url/>
@@ -97,7 +97,6 @@
                             <name>${docker.image.prefix}/${docker.image.name}</name>
                             <build>
                                 <dockerFileDir>${project.basedir}/src/main/docker</dockerFileDir>
-<!--                                <dockerFileDir>${project.basedir}</dockerFileDir>-->
                                 <!--copies artifact to docker build dir in target-->
                                 <assembly>
                                     <descriptorRef>artifact</descriptorRef>
