@@ -14,14 +14,18 @@
 
     <title>Application page</title>
 </head>
-<body>
-<h4>Application main page</h4>
+<body class="container">
+<h2>Application main page</h2>
+<div class="add-new">
+    <a href="#" th:href="@{/items/create}">Add new item</a>
+</div>
 <table>
     <thead>
     <tr>
         <th>ID</th>
         <th>Name</th>
         <th>Active</th>
+        <th></th>
     </tr>
     </thead>
     <tbody>
@@ -39,8 +43,5 @@
     </tr>
     </tbody>
 </table>
-<div>
-    <a href="#" th:href="@{/items/create}">Add item</a>
-</div>
 </body>
 </html>

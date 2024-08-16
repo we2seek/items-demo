@@ -14,9 +14,9 @@
 
     <title>Item form</title>
 </head>
-<body>
+<body class="container">
+<h4>Delete item?</h4>
 <form class="form-horizontal" th:object="${itemForm}" th:action="@{/items/delete}" method="post">
-    <h4>Delete?</h4>
     <input type="hidden" th:field="*{id}"/>
     <ul>
         <li th:text="*{name}"></li>
