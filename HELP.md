@@ -7,9 +7,17 @@ docker run \
 -e MYSQL_DATABASE=test \
 -v /home/DN151084TVA/projects/udemy/docker-for-java-developers/items-demo/src/main/resources/sql/schema-mysql.sql:/docker-entrypoint-initdb.d/a.sql \
 -v /home/DN151084TVA/projects/udemy/docker-for-java-developers/items-demo/src/main/resources/sql/data-mysql.sql:/docker-entrypoint-initdb.d/b.sql \
---name some-mysql \
+--name mysqldb \
 --detach mysql \
 --init-connect="GRANT CREATE USER ON *.* TO 'root'@'%'; FLUSH PRIVILEGES;"
+```
+```
+docker run \
+-p 3306:3306 \
+-e MYSQL_ALLOW_EMPTY_PASSWORD=yes \
+-e MYSQL_DATABASE=test \
+--name mysqldb \
+--detach mysql
 ```
 ### build image
 ```
