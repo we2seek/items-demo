@@ -1,5 +1,6 @@
 package com.we2seek.items_demo.domain;
 
+import java.time.LocalDateTime;
 import java.util.StringJoiner;
 
 public class Item {
@@ -7,11 +8,18 @@ public class Item {
     private Integer id;
     private String name;
     private boolean active;
+    private LocalDateTime created;
+    private LocalDateTime updated;
 
-    public Item(Integer id, String name, boolean active) {
+    public Item() {
+    }
+
+    public Item(Integer id, String name, boolean active, LocalDateTime created, LocalDateTime updated) {
         this.id = id;
         this.name = name;
         this.active = active;
+        this.created = created;
+        this.updated = updated;
     }
 
     public Integer getId() {
@@ -38,12 +46,30 @@ public class Item {
         this.active = active;
     }
 
+    public LocalDateTime getCreated() {
+        return created;
+    }
+
+    public void setCreated(LocalDateTime created) {
+        this.created = created;
+    }
+
+    public LocalDateTime getUpdated() {
+        return updated;
+    }
+
+    public void setUpdated(LocalDateTime updated) {
+        this.updated = updated;
+    }
+
     @Override
     public String toString() {
         return new StringJoiner(", ", Item.class.getSimpleName() + "[", "]")
                 .add("id=" + id)
                 .add("name='" + name + "'")
                 .add("active=" + active)
+                .add("created=" + created)
+                .add("updated=" + updated)
                 .toString();
     }
 }

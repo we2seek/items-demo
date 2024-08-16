@@ -7,18 +7,33 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneId;
 import java.util.List;
 
 @Service
 public class ItemDAOImpl implements ItemDAO {
+
+    private static final ZoneId ZONE_ID = ZoneId.systemDefault();
 
     private final Logger log = LoggerFactory.getLogger(ItemDAOImpl.class);
     private final RowMapper<Item> rowMapper = (rs, rowNum) ->
             new Item(
                     rs.getInt("id"),
                     rs.getString("name"),
-                    rs.getBoolean("active")
+                    rs.getBoolean("active"),
+                    toDate(rs.getTimestamp("created")),
+                    toDate(rs.getTimestamp("updated"))
             );
+
+    private LocalDateTime toDate(Timestamp timestamp) {
+        if (timestamp == null) {
+            return null;
+        }
+        return LocalDateTime.ofInstant(Instant.ofEpochMilli(timestamp.getTime()), ZONE_ID);
+    }
 
     private final JdbcTemplate jdbcTemplate;
 

@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.stream.Collectors;
+
 @Controller
 public class HomeController {
 
@@ -25,9 +27,14 @@ public class HomeController {
         this.itemToItemFromConverter = itemToItemFromConverter;
     }
 
-    @GetMapping({"/", "index"})
+    @GetMapping({"/"})
     public String index(Model model) {
-        model.addAttribute("items", itemDAO.getAll());
+        model.addAttribute(
+                "items",
+                itemDAO.getAll().stream()
+                        .map(itemToItemFromConverter::convert)
+                        .collect(Collectors.toList())
+        );
 
         return "index";
     }
@@ -44,7 +51,7 @@ public class HomeController {
         Item item = itemFormToItemConverter.convert(form);
         itemDAO.create(item);
 
-        return "redirect:/index";
+        return "redirect:/";
     }
 
     @GetMapping("/items/edit/{id}")
@@ -65,14 +72,14 @@ public class HomeController {
         return "item/deleteForm";
     }
 
-    @PostMapping(value="/items/delete", params="action=delete")
+    @PostMapping(value = "/items/delete", params = "action=delete")
     public String deleteItem(ItemForm form) {
         itemDAO.delete(form.getId());
 
         return "redirect:/index";
     }
 
-    @PostMapping(value="/items/delete", params="action=cancel")
+    @PostMapping(value = "/items/delete", params = "action=cancel")
     public String deleteItemCancel() {
         return "redirect:/index";
     }

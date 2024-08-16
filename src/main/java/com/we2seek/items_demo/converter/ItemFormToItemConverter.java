@@ -10,6 +10,6 @@ public class ItemFormToItemConverter implements Converter<ItemForm, Item> {
 
     @Override
     public Item convert(ItemForm source) {
-        return new Item(source.getId(), source.getName(), source.isActive());
+        return new Item(source.getId(), source.getName(), source.isActive(), null, null);
     }
 }
