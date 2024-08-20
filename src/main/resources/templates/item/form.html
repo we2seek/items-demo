@@ -1,50 +1,40 @@
 <!doctype html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link th:href="@{/css/style.css}" rel="stylesheet" media="screen"/>
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet">
-
-    <title>Item form</title>
+    <title>Items Demo</title>
 </head>
-<body class="container">
-<h4>Edit item</h4>
-<form class="form-horizontal" th:object="${itemForm}" th:action="@{/items/create}" method="post">
-    <div th:if="${#fields.hasErrors('*')}" class="alert alert-danger">
-        <p th:text="#{form.hasErrors}">Error Message</p>
-    </div>
-    <input type="hidden" th:field="*{id}"/>
-    <div class="form-group" th:class="${#fields.hasErrors('name')} ? 'form-group has-error' : 'form-group'">
-        <label class="col-sm-2 control-label">Name:</label>
-        <div class="col-sm-10">
-            <input type="text" class="form-control" th:field="*{name}" th:errorclass="has-error"/>
-
+<body>
+<div class="container">
+    <h2 class="my-5">Edit item</h2>
+    <form th:object="${itemForm}" th:action="@{/items/create}" method="post">
+        <input type="hidden" th:field="*{id}"/>
+        <div class="alert alert-danger mb-3" th:if="${#fields.hasErrors('*')}">
+            <p th:text="#{form.hasErrors}">Error Message</p>
+        </div>
+        <div class="mb-3" th:class="${#fields.hasErrors('name')} ? 'form-group has-error' : 'form-group'">
+            <label for="nameInput" class="form-label">Name</label>
+            <input type="text" class="form-control" id="nameInput" aria-describedby="nameHelp" th:autofocus
+                   th:field="*{name}"
+                   th:errorclass="has-error">
+            <div id="nameHelp" class="form-text">Provide item short name</div>
             <span class="help-block">
                        <ul>
-                           <li th:each="err : ${#fields.errors('name')}" th:text="${err}" />
+                           <li th:each="err : ${#fields.errors('name')}" th:text="${err}"/>
                        </ul>
                     </span>
         </div>
-    </div>
-    <div class="form-group" th:class="${#fields.hasErrors('active')} ? 'form-group has-error' : 'form-group'">
-        <label class="col-sm-2 control-label">Active:</label>
-        <div class="col-sm-10">
-            <input type="checkbox" class="form-control" th:field="*{active}" th:errorclass="has-error"/>
-
-            <span class="help-block">
-                       <ul>
-                           <li th:each="err : ${#fields.errors('active')}" th:text="${err}" />
-                       </ul>
-                    </span>
+        <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="activeCheckbox" th:field="*{active}">
+            <label class="form-check-label" for="activeCheckbox">Active</label>
         </div>
-    </div>
-    <button type="submit" class="btn btn-default">Submit</button>
-</form>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+
 </body>
 </html>

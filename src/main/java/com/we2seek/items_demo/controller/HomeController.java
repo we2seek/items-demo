@@ -41,7 +41,9 @@ public class HomeController {
 
     @GetMapping(value = "/items/create")
     public String showCreateForm(Model model) {
-        model.addAttribute("itemForm", new ItemForm());
+        ItemForm itemForm = new ItemForm();
+        itemForm.setActive(true);
+        model.addAttribute("itemForm", itemForm);
 
         return "item/form";
     }
@@ -76,11 +78,11 @@ public class HomeController {
     public String deleteItem(ItemForm form) {
         itemDAO.delete(form.getId());
 
-        return "redirect:/index";
+        return "redirect:/";
     }
 
     @PostMapping(value = "/items/delete", params = "action=cancel")
     public String deleteItemCancel() {
-        return "redirect:/index";
+        return "redirect:/";
     }
 }
