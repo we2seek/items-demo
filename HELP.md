@@ -1,4 +1,6 @@
-### MySQL container
+### Run application from IntelliJ (dev mode)
+
+1. Start MySQL in docker container with one of the following way:
 ```
 docker run \
 -p 3306:3306 \
@@ -19,17 +21,17 @@ docker run \
 --name mysqldb \
 --detach mysql
 ```
-### build image
-```
-docker build -t items-demo-docker .
-```
+2. Start spring-boot application from IntelliJ
 
-### run container
-```
-docker run --detach -p 8080:8080 items-demo-docker
-```
-
-### Working w/ io.fabric8:docker-maven-plugin
+### Build/Run docker image with application
 ```
 mvn clean package docker:build
+mvn docker:start
+mvn docker:stop
+```
+
+### Run application using docker-compose
+```
+docker-compose -f ./src/main/docker/docker-compose.yml up -d
+docker-compose -f ./src/main/docker/docker-compose.yml down
 ```
