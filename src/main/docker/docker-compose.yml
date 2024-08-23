@@ -2,6 +2,8 @@ version: '3'
 services:
   mysqldb:
     image: mysql
+    volumes:
+      - db_data:/var/lib/mysql
     restart: always
     ports:
       - '3306:3306'
@@ -22,3 +24,5 @@ services:
       interval: 15s
       timeout: 5s
       retries: 3
+volumes:
+  db_data:
