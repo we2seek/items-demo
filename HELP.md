@@ -31,6 +31,11 @@ mvn docker:stop
 ```
 
 ### Run application using docker-compose
+1. Create application jar
+```
+mvn clean package
+```
+2. Run container
 ```
 docker-compose up
 docker-compose up -d
