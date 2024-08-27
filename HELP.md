@@ -32,6 +32,7 @@ mvn docker:stop
 
 ### Run application using docker-compose
 ```
-docker-compose -f ./src/main/docker/docker-compose.yml up -d
-docker-compose -f ./src/main/docker/docker-compose.yml down
+docker-compose up
+docker-compose up -d
+docker-compose down
 ```
