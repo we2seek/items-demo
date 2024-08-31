@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<!--All Items Table-->
+<div th:fragment="tableItems">
+    <a class="btn btn-primary mb-3" role="button" tabindex="0" href="#" th:href="@{/create}">
+        <i class="bi bi-plus-square me-1"></i>
+        Add new item
+    </a>
+    <table class="table mb-3">
+        <thead>
+        <tr class="table-primary">
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">Active</th>
+            <th scope="col">Created</th>
+            <th scope="col">Updated</th>
+            <th scope="col"></th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${items.empty}">
+            <td colspan="4">No items available...</td>
+        </tr>
+        <tr th:each="item,iter : ${items}">
+            <td><span th:text="${item.id}">ID</span></td>
+            <td><span th:text="${item.name}">Name</span></td>
+            <td><span th:text="${item.active}">Active</span></td>
+            <td><span th:text="${item.created}">Created</span></td>
+            <td><span th:text="${item.updated}">Updated</span></td>
+            <td>
+                <a class="icon-link me-3" role="button" th:tabindex="${2 * (iter.index) + 1}"
+                   th:href="${'/' + item.id}">
+                    <i class="bi bi-pencil-square"></i>
+                </a>
+                <a class="icon-link" role="button" th:tabindex="${2 * (iter.index) + 2}"
+                   th:href="${'/delete/' + item.id}">
+                    <i class="bi bi-trash"></i>
+                </a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<!--Edit Item Form-->
+<form th:fragment="editForm" th:object="${itemForm}" th:action="@{/create}" method="post">
+    <input type="hidden" th:field="*{id}"/>
+    <div class="alert alert-danger mb-3" th:if="${#fields.hasErrors('*')}">
+        <p th:text="#{form.hasErrors}">Error Message</p>
+    </div>
+    <div class="mb-3" th:class="${#fields.hasErrors('name')} ? 'form-group has-error' : 'form-group'">
+        <label for="nameInput" class="form-label">Name</label>
+        <input type="text" class="form-control" id="nameInput" aria-describedby="nameHelp" th:autofocus
+               th:field="*{name}"
+               th:errorclass="has-error">
+        <div id="nameHelp" class="form-text">Provide item short name</div>
+        <span class="help-block">
+                       <ul>
+                           <li th:each="err : ${#fields.errors('name')}" th:text="${err}"/>
+                       </ul>
+                    </span>
+    </div>
+    <div class="mb-3 form-check">
+        <input type="checkbox" class="form-check-input" id="activeCheckbox" th:field="*{active}">
+        <label class="form-check-label" for="activeCheckbox">Active</label>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+
+<!--Delete Item Form-->
+<form th:fragment="deleteForm" class="form-horizontal" th:object="${itemForm}" th:action="@{/delete}" method="post">
+    <input type="hidden" th:field="*{id}"/>
+    <table class="table mb-5">
+        <tr>
+            <th>id</th>
+            <td th:text="*{id}"></td>
+        </tr>
+        <tr>
+            <th>name</th>
+            <td th:text="*{name}"></td>
+        </tr>
+        <tr>
+            <th>active</th>
+            <td th:text="*{active}"></td>
+        </tr>
+        <tr>
+            <th>created</th>
+            <td th:text="*{created}"></td>
+        </tr>
+        <tr>
+            <th>updated</th>
+            <td th:text="*{updated}"></td>
+        </tr>
+    </table>
+    <div class="mb-3">
+        <button class="btn btn-danger" tabindex="1" type="submit" name="action" value="delete">Confirm</button>
+        <button class="btn btn-default" tabindex="0" type="submit" name="action" value="cancel" autofocus>Cancel
+        </button>
+    </div>
+
+</form>
+
+</html>
