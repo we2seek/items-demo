@@ -9,7 +9,6 @@
     <title th:text="${title}">Items Demo</title>
 </head>
 <body>
-<!--TODO: use thymeleaf fragments...-->
 <div class="container">
     <h2 th:text="${header.toString()}" class="my-5">Application main page</h2>
     <div th:replace="~{fragment/fragments::${fragment}}"></div>

@@ -7,3 +7,6 @@ body {
     background-color: #fff;
     color: #555;
 }*/
+.inactive{
+    color: orange !important;
+}

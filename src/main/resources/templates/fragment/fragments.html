@@ -24,7 +24,7 @@
         <tr th:if="${items.empty}">
             <td colspan="4">No items available...</td>
         </tr>
-        <tr th:each="item,iter : ${items}">
+        <tr class="inactive" th:each="item,iter : ${items}">
             <td><span th:text="${item.id}">ID</span></td>
             <td><span th:text="${item.name}">Name</span></td>
             <td><span th:text="${item.active}">Active</span></td>
