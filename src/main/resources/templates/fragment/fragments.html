@@ -24,10 +24,12 @@
         <tr th:if="${items.empty}">
             <td colspan="4">No items available...</td>
         </tr>
-        <tr class="inactive" th:each="item,iter : ${items}">
+        <tr th:each="item,iter : ${items}" th:attr="style=${item.active}?null:'opacity: 50%'">
             <td><span th:text="${item.id}">ID</span></td>
             <td><span th:text="${item.name}">Name</span></td>
-            <td><span th:text="${item.active}">Active</span></td>
+            <td><span th:if="${item.active}">
+                <i class="bi bi-check-circle-fill text-primary"></i>
+            </span></td>
             <td><span th:text="${item.created}">Created</span></td>
             <td><span th:text="${item.updated}">Updated</span></td>
             <td>

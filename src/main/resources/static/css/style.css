@@ -8,5 +8,7 @@ body {
     color: #555;
 }*/
 .inactive{
-    color: orange !important;
+    color: orange;
+    background-color: gray;
+    opacity: 50%;
 }
