@@ -31,7 +31,7 @@ public class HomeController {
         this.itemToItemFromConverter = itemToItemFromConverter;
     }
 
-    private void getLog(Model model) {
+    private void showLog(Model model) {
         log.info("Title = {}", model.getAttribute("title"));
         log.info("Header = {}", model.getAttribute("header"));
         log.info("Fragment = {}", model.getAttribute("fragment"));
@@ -50,7 +50,7 @@ public class HomeController {
         model.addAttribute("header", "Application main page");
         model.addAttribute("fragment", "tableItems");
 
-        getLog(model);
+        showLog(model);
 
         return "index";
     }
@@ -60,12 +60,12 @@ public class HomeController {
         ItemForm itemForm = new ItemForm();
         itemForm.setActive(true);
         model.addAttribute("itemForm", itemForm);
-        model.addAttribute("title", "Create");
 
+        model.addAttribute("title", "Create");
         model.addAttribute("header", "Create item");
         model.addAttribute("fragment", "editForm");
 
-        getLog(model);
+        showLog(model);
 
         return "index";
     }
@@ -88,7 +88,7 @@ public class HomeController {
         model.addAttribute("header", "Edit item");
         model.addAttribute("fragment", "editForm");
 
-        getLog(model);
+        showLog(model);
 
         return "index";
     }
@@ -103,7 +103,7 @@ public class HomeController {
         model.addAttribute("header", "Delete item");
         model.addAttribute("fragment", "deleteForm");
 
-        getLog(model);
+        showLog(model);
 
         return "index";
     }
