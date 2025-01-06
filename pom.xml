@@ -108,7 +108,7 @@
                         <image>
                             <name>${docker.image.prefix}/${docker.image.name}</name>
                             <build>
-                                <dockerFileDir>${project.basedir}/src/main/docker</dockerFileDir>
+                                <dockerFileDir>${project.basedir}</dockerFileDir>
                                 <!--copies artifact to docker build dir in target-->
                                 <assembly>
                                     <descriptorRef>artifact</descriptorRef>
@@ -136,6 +136,11 @@
                         <image>
                             <name>mysql</name>
                             <alias>mysqldb</alias>
+                            <build>
+                                <volumes>
+                                    <volume>/tmp/docker/mysql:/var/lib/mysql</volume>
+                                </volumes>
+                            </build>
                             <run>
                                 <ports>
                                     <port>3306:3306</port>
