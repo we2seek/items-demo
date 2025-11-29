@@ -20,7 +20,8 @@
             <label for="nameInput" class="form-label">Name</label>
             <input type="text" class="form-control" id="nameInput" aria-describedby="nameHelp" th:autofocus
                    th:field="*{name}"
-                   th:errorclass="has-error">
+                   th:errorclass="has-error"
+                   maxlength="32">
             <div id="nameHelp" class="form-text">Provide item short name</div>
             <span class="help-block">
                        <ul>
